@@ -95,12 +95,10 @@ namespace NotificationService.Controllers
             {
                 var jsonMessage = JsonConvert.SerializeObject(new
                 {
-                    notification = new { title = "Title", body = "This is body" },
                     registration_ids = new[] { token },
                     data = new { body = "Data Body", title = "Data Title"},
-                    priority = 10,
-                    wabpush = new { Urgency = "high"},
-                    android = new { priority = "high"},
+                    priority = "high",
+                    webpush = new { Urgency = "high"},
                     time_to_live = 0
                 });
                 var request = new HttpRequestMessage(HttpMethod.Post, firebaseURL);
