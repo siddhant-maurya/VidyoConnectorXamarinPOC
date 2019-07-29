@@ -19,7 +19,7 @@ namespace VidyoConnector.Android
     [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
     public class MessagingService : FirebaseMessagingService
     {
-        private readonly string NOTIFICATION_CHANNEL_ID = "com.vidyo.VidyoConnector";
+        private readonly string NOTIFICATION_CHANNEL_ID = "my_notification_channel";
 
         public override void OnMessageReceived(RemoteMessage message)
         {
