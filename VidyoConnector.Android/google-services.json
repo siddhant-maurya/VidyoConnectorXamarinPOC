@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1012420977725",
+    "firebase_url": "https://callnotification-96c2c.firebaseio.com",
+    "project_id": "callnotification-96c2c",
+    "storage_bucket": "callnotification-96c2c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012420977725:android:66bfdf4ca365cb46",
+        "android_client_info": {
+          "package_name": "com.vidyo.VidyoConnector"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012420977725-62bm5sqlepkjmk8n27iusob1ih6u4oia.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU2k3t77_cKou2yEUTwSptn8I2g0Co0O0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012420977725-62bm5sqlepkjmk8n27iusob1ih6u4oia.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

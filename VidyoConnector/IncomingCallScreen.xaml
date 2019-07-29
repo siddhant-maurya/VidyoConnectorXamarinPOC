@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VidyoConnector.IncomingCallScreen">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Incoming Call Screen"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            <!--<StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                <Button Text="Accept" WidthRequest="100" BackgroundColor="Green" TextColor="White"/>
+                <Button Text="Reject" WidthRequest="100" BackgroundColor="Red" TextColor="White"/>
+            </StackLayout>
+            <Label Text=" "/>-->
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

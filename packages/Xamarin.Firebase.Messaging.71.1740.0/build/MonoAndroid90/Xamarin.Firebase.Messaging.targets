@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ProguardConfiguration Include="$(MSBuildThisFileDirectory)..\..\proguard\MonoAndroid90\proguard.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+  </ItemGroup>
+
+  <ItemGroup>
+    <XamarinBuildRestoreResources Include="_XbdRestoreItems_googlefb_firebasemessaging" />
+  </ItemGroup>
+  <Target Name="_XbdRestoreItems_googlefb_firebasemessaging">
+    <ItemGroup>
+      <XamarinBuildDownload Include="googlefb-17.4.0/firebasemessaging">
+        <Url>https://dl.google.com/dl/android/maven2/com/google/firebase/firebase-messaging/17.4.0/firebase-messaging-17.4.0.aar</Url>
+        <ToFile>firebasemessaging-17.4.0.aar</ToFile>
+        <Kind>Uncompressed</Kind>
+        <Md5>18c7b131fc533dcd5a2c5ecba59566d7</Md5>
+      </XamarinBuildDownload>
+    </ItemGroup>
+    <ItemGroup>
+      <XamarinBuildDownloadRestoreAssemblyAar Include="$(XamarinBuildDownloadDir)googlefb-17.4.0\firebasemessaging\firebasemessaging-17.4.0.aar">
+        <LogicalName>__AndroidLibraryProjects__.zip</LogicalName>
+        <AssemblyName>Xamarin.Firebase.Messaging</AssemblyName>
+      </XamarinBuildDownloadRestoreAssemblyAar>
+    </ItemGroup>
+  </Target>
+
+</Project>

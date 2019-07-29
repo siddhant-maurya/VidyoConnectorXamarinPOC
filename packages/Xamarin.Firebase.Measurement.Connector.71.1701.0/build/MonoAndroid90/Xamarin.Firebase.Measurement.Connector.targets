@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+  </ItemGroup>
+
+  <ItemGroup>
+  </ItemGroup>
+
+  <ItemGroup>
+    <XamarinBuildRestoreResources Include="_XbdRestoreItems_googlefb_firebasemeasurementconnector" />
+  </ItemGroup>
+  <Target Name="_XbdRestoreItems_googlefb_firebasemeasurementconnector">
+    <ItemGroup>
+      <XamarinBuildDownload Include="googlefb-17.0.1/firebasemeasurementconnector">
+        <Url>https://dl.google.com/dl/android/maven2/com/google/firebase/firebase-measurement-connector/17.0.1/firebase-measurement-connector-17.0.1.aar</Url>
+        <ToFile>firebasemeasurementconnector-17.0.1.aar</ToFile>
+        <Kind>Uncompressed</Kind>
+        <Md5>c4271d3d77f9901900d4e24f29f1efa2</Md5>
+      </XamarinBuildDownload>
+    </ItemGroup>
+    <ItemGroup>
+      <XamarinBuildDownloadRestoreAssemblyAar Include="$(XamarinBuildDownloadDir)googlefb-17.0.1\firebasemeasurementconnector\firebasemeasurementconnector-17.0.1.aar">
+        <LogicalName>__AndroidLibraryProjects__.zip</LogicalName>
+        <AssemblyName>Xamarin.Firebase.Measurement.Connector</AssemblyName>
+      </XamarinBuildDownloadRestoreAssemblyAar>
+    </ItemGroup>
+  </Target>
+
+</Project>
