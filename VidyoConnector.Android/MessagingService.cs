@@ -25,7 +25,7 @@ namespace VidyoConnector.Android
         {
             if (!message.Data.GetEnumerator().MoveNext())
             {
-                SendNotification(message.GetNotification().Title, message.GetNotification().Body);
+                OnShowIncomingCallUi(message.GetNotification().Title, message.GetNotification().Body);
             }
             else
             {
@@ -42,38 +42,58 @@ namespace VidyoConnector.Android
             string title, body;
             data.TryGetValue("title", out title);
             data.TryGetValue("body", out body);
-            SendNotification(title,  body);
+            OnShowIncomingCallUi(title, body);
         }
 
-        private void SendNotification(string title, string body)
+        
+        private PendingIntent GetIncomingCallIntent(string callId)
         {
-            NotificationManager notificationManager = (NotificationManager)GetSystemService(Context.NotificationService);
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
-            {
-                NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,"Notification Channel",
-                    NotificationImportance.Max);
-                notificationChannel.Description = "Description";
-                notificationChannel.EnableLights(true);
-                notificationChannel.LightColor = Color.Blue;
-                notificationChannel.SetVibrationPattern(new long[] {0, 100,500,1000 });
 
-                notificationManager.CreateNotificationChannel(notificationChannel);
-            }
+            Intent intent = new Intent(this.ApplicationContext, typeof(IncomingCall));
+            intent.AddFlags(ActivityFlags.NewTask);
+            intent.PutExtra("ConnectionGuid", callId);
+            return PendingIntent.GetBroadcast(this, new System.Random().Next(), intent, PendingIntentFlags.OneShot);
+        }
+
+        private void OnShowIncomingCallUi(string callId, string callerDisplayName)
+        {
+            var incomingCallIntent = GetIncomingCallIntent(callId);
 
             Intent myIntent = new Intent();
             var PI = PendingIntent.GetBroadcast(this, new System.Random().Next(), myIntent, PendingIntentFlags.OneShot);
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
-            notificationBuilder.SetAutoCancel(true)
-                .SetDefaults(-1)
-                .SetWhen(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds())
-                .SetContentTitle(title)
-                .SetContentText(body)
-                .SetSmallIcon(Resource.Drawable.ic_dialog_close_dark)
-                .SetContentInfo("info")
-                .AddAction(new NotificationCompat.Action(1, "Reject", PI))
-                .AddAction(new NotificationCompat.Action(1, "Answer", PI));
+                
+            // Build the notification as an ongoing high priority item; this ensures it will show as
+            // a heads up notification which slides down over top of the current content.
+            var builder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+            builder.SetOngoing(true);
+            builder.SetOnlyAlertOnce(false);
+            builder.SetPriority((int)NotificationPriority.High);
+            builder.SetTimeoutAfter(60 * 1000);
+            builder.SetVisibility(NotificationCompat.VisibilityPublic);
 
-            notificationManager.Notify(new Random().Next(), notificationBuilder.Build());
+            // Set notification content intent to take user to fullscreen UI if user taps on the
+            // notification body.
+            builder.SetContentIntent(incomingCallIntent);
+            // Set full screen intent to trigger display of the fullscreen UI when the notification
+            // manager deems it appropriate.
+            builder.SetFullScreenIntent(incomingCallIntent, true);
+
+            // Setup notification content.
+            builder.SetSmallIcon(Resource.Drawable.ic_dialog_close_dark);
+            builder.SetContentTitle("Incoming Call");
+            builder.SetContentText($"Incoming Call from {callerDisplayName}");
+
+            // Use builder.addAction(..) to add buttons to answer or reject the call.
+            builder.AddAction(new NotificationCompat.Action(1, "Reject", PI));
+            builder.AddAction(new NotificationCompat.Action(1, "Answer", PI));
+
+            var notification = builder.Build();
+            notification.Flags = NotificationFlags.AutoCancel & NotificationFlags.Insistent & NotificationFlags.NoClear & NotificationFlags.OngoingEvent;
+
+            NotificationManager notificationManager = (NotificationManager)this.GetSystemService(Context.NotificationService);
+            notificationManager.Notify(2, notification);
+            
+            
         }
     }
 }

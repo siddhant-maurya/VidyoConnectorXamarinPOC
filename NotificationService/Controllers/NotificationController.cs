@@ -15,13 +15,13 @@ namespace NotificationService.Controllers
 {
     public class NotificationController : ApiController
     {
-       
+
 
         public string DisconnectCall()
         {
             return "bhg";
         }
-        
+
         //public void SendMessage()
         //{
         //    string serverKey = "AAAA67j-JD0:APA91bEqRx134JkYtImqij5cs-rApLYbCdn6Jecd34_S6-dMM3zKEV6XzfO3u93De1U0pUBuAU8wm2lPtHMzTKiAMqvDPTQEUhNd7zBKYi9bGpMnreMtMZlcee_rF9kInGbWQJu4aXgF";
@@ -87,18 +87,27 @@ namespace NotificationService.Controllers
         [HttpGet]
         public async Task<string> Getsend()
         {
-            string token = "dgMv2_tsjAM:APA91bG3jgzmtJ6VjAM2XpP-WAesFdZWotW2fGCxO432MKc5NhxHh4EWUqaXXVophxuDYWv5l8mPlK7z3kRuq2_IL3ScgW9PjsPHG_v8JjjzP4lPjiqDCAbAOR0gemFRjG8FFDWB-X8v";
+            string vidyoToken = "cHJvdmlzaW9uAHVzZXIxQDFhNWYzMy52aWR5by5pbwA2MzczMTIwNzU3MAAAZjAwYmVlNjA3NWVjYjRmZDQ3ZTQxOTk0MGY5MDEzZjBkY2Q3YTVjMmYyMDViYzgwMDVjYzRlNWYyYjEyOTg0MzUwZjc4YmEzOTVjZWVkNGI2Njc2NjA0ZmRkNmFjN2U2";
+            string asusToken = "dgMv2_tsjAM:APA91bG3jgzmtJ6VjAM2XpP-WAesFdZWotW2fGCxO432MKc5NhxHh4EWUqaXXVophxuDYWv5l8mPlK7z3kRuq2_IL3ScgW9PjsPHG_v8JjjzP4lPjiqDCAbAOR0gemFRjG8FFDWB-X8v";
+            string miToken = "cSebR6dAZRY:APA91bGJ0MazDwcGuTCqxxOfEjV7QlQvrVNR2JIOIpZ1tG3mgBs_T2AjP9aeLQ93LlJczMhLY8aiwOFhuTfXvbwCvN1ICsnfADuaL1iV7R87X5-1vxxCkzxdLkt_KUQvFlbloEsrfOZg";
             string serverKey = "AAAA67j-JD0:APA91bEqRx134JkYtImqij5cs-rApLYbCdn6Jecd34_S6-dMM3zKEV6XzfO3u93De1U0pUBuAU8wm2lPtHMzTKiAMqvDPTQEUhNd7zBKYi9bGpMnreMtMZlcee_rF9kInGbWQJu4aXgF";
+
             string senderId = "1012420977725";
+
             var firebaseURL = "https://fcm.googleapis.com/fcm/send";
             try
             {
                 var jsonMessage = JsonConvert.SerializeObject(new
                 {
-                    registration_ids = new[] { token },
-                    data = new { body = "Data Body", title = "Data Title"},
+                    registration_ids = new[] { asusToken },
+                    data = new
+                    {
+                        body = "Data Body",
+                        title = "Data Title",
+                        vidyotoken = vidyoToken
+                    },
                     priority = "high",
-                    webpush = new { Urgency = "high"},
+                    webpush = new { Urgency = "high" },
                     time_to_live = 0
                 });
                 var request = new HttpRequestMessage(HttpMethod.Post, firebaseURL);
